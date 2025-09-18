@@ -5,9 +5,15 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Repository;
+
 import com.cursogetafe.agenda.modelo.Contacto;
 import com.cursogetafe.agenda.util.Contactos;
 
+@Repository("contactoDao")
+@Profile("mem")
 public class ContactoDaoMem implements ContactoDao {
 	
 	//vamos a guardar los datos en un map
@@ -16,10 +22,11 @@ public class ContactoDaoMem implements ContactoDao {
 	private int proximoId;
 	private int cant;
 		
+	
 	//hacemos el constructor
 	public ContactoDaoMem() {
 		almacen = new HashMap<Integer, Contacto>();
-		proximoId = 1; //para que se valla incrementando
+		proximoId = 1; //para que se vaya incrementando
 		cargaInicial();
 	}
 	

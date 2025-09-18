@@ -1,57 +1,48 @@
 package com.cursogetafe.agenda.config;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Properties;
+
 
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+
+@Configuration
+@PropertySource("app.properties")
+@ComponentScan("com.cursogetafe.agenda")
 public class Config {
-	private static EntityManagerFactory emf;
-	private static DataSource ds; 
-	private static Properties prop;
+
 	
-	private Config() {}
-	
-	public static EntityManagerFactory getEmf() {
-		if(emf == null) {
-			emf = Persistence.createEntityManagerFactory("agendaJPA");
-		}
-		return emf;
+	@Autowired
+	Environment prop;
+
+	@Bean("emf")
+	@Profile({"jpa", "default"})
+	public EntityManagerFactory getEmf() {
+		return Persistence.createEntityManagerFactory("agendaJPA");
 	}
+
 	
-	public static DataSource getDataSource() { //patron singleton 
-		if(ds == null) {
-			//neceistamos trabajar contra el fichero
+	@Bean("dataSource")
+	@Profile("jdbc")
+	public DataSource getDataSource() { //patron singleton  
+		
 			BasicDataSource bds = new BasicDataSource();
-			Properties prop = getProp(); //nuestro objeto prop
 			bds.setUrl(prop.getProperty("bbdd.url"));
 			bds.setDriverClassName(prop.getProperty("bbdd.driver"));
 			bds.setUsername(prop.getProperty("bbdd.user"));
 			bds.setPassword(prop.getProperty("bbdd.pass"));
-			ds = bds;
-		}
-		return ds;//referencia al mismo objeto 
+			return bds;
 	}
 	
-	
-	//la clase properties es un mapa 
-	public static Properties getProp(){ //clase preparada para ir a leer nuestro fichero de propertis y cuabdo le pidamos la clave nos la da, o lo que tengamos escrito el lo vera 
-		if(prop == null) {
-			prop= new Properties();
-			try(FileReader fr = new FileReader("app.properties")){
-				prop.load(fr);
-			}catch(IOException e) {
-				e.printStackTrace();
-				throw new RuntimeException("No se puede leer el fichero de properetis");
-			}
-		}
-		return prop;
-	}
-
 }

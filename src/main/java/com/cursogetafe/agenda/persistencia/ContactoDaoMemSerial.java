@@ -11,9 +11,15 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Repository;
+
 import com.cursogetafe.agenda.modelo.Contacto;
 import com.cursogetafe.agenda.util.Contactos;
 
+
+@Repository("contactoDao")
+@Profile("serial")
 public class ContactoDaoMemSerial implements ContactoDao {
 	
 	//vamos a guardar los datos en un map
@@ -25,6 +31,7 @@ public class ContactoDaoMemSerial implements ContactoDao {
 	private final String FICH_ALM = "almacen.dat";
 	private final String FICH_ID = "id.dat";
 		
+	
 	//hacemos el constructor
 	public ContactoDaoMemSerial() {
 		almacen = new HashMap<Integer, Contacto>();

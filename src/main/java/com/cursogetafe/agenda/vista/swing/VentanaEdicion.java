@@ -587,7 +587,7 @@ public class VentanaEdicion extends JFrame {
 		// Compilar la expresion regular en un patron
         Pattern pattern = Pattern.compile(PATTERN_EMAIL);
  
-        // Realiza el macheo entre el patr�n y el correo
+        // Realiza el macheo entre el patrón y el correo
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
 	}
@@ -642,7 +642,7 @@ public class VentanaEdicion extends JFrame {
 		public void actionPerformed(ActionEvent ev) {
 			if (ev.getSource() == btnCancelar) {
 				if (!edicion || JOptionPane.showConfirmDialog(null,
-										"Desea abandonar la ventana\n Se perder�n los cambios realizados",
+										"Desea abandonar la ventana\n Se perderán los cambios realizados",
 										"Salir de Contactos", 2) == 0) {
 					salir();
 				}
@@ -667,7 +667,7 @@ public class VentanaEdicion extends JFrame {
 							if (JOptionPane
 									.showConfirmDialog(
 											null,
-											"El Contacto ha sido grabado con Exito\nDesea cargar m�s contactos",
+											"El Contacto ha sido grabado con Exito\nDesea cargar más contactos",
 											"Salir de Contactos", 2) == 0) {
 								inicializaPantalla();
 							} else {
@@ -683,7 +683,7 @@ public class VentanaEdicion extends JFrame {
 						}
 					} else {
 						JOptionPane.showMessageDialog(null,
-								"Debe ingresar un Nombre y Apellido v�lidos");
+								"Debe ingresar un Nombre y Apellido válidos");
 
 					}
 				}

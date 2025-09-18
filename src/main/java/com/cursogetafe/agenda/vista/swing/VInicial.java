@@ -30,10 +30,16 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
-import com.cursogetafe.agenda.config.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
+
 import com.cursogetafe.agenda.modelo.Contacto;
 import com.cursogetafe.agenda.negocio.Agenda;
 
+
+@Component
+@Profile({"grafico", "default"})
 public class VInicial extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private String separadorPrincipal=";", separadorSecundario="/";
@@ -54,7 +60,7 @@ public class VInicial extends JFrame {
 	private DefaultTableModel modelo;
 	private String[][] datosTabla;// = new String[0][0];
 	private String[] titulosTabla = { "Nombre", "Apellidos", "Apodo",
-			"Tipo Via", "Via", "N�mero", "Piso", "Puerta", "Cod.Postal",
+			"Tipo Via", "Via", "Número", "Piso", "Puerta", "Cod.Postal",
 			"Ciudad", "Provincia" };
 	private Contacto contactoActual;
 	private int AGREGAR = 0;
@@ -63,11 +69,20 @@ public class VInicial extends JFrame {
 	private int ELIMINAR = 3;
 	int filaActualTabla;
 	
+	
 //	private Agenda agenda = new AgendaImpl();
-	private Agenda agenda = BeanFactory.getAgenda();
+	private Agenda agenda;
+	
+	
+	@Autowired
+	public VInicial(Agenda agenda) {
+	super("Agenda de Contactos");
+	this.agenda = agenda;
+	init();
+}
 
-	public VInicial() {
-		super("Agenda de Contactos");
+	public void init() {
+		
 		setResizable(false);
 		setBounds(100, 10, 918, 746);
 		getContentPane().setLayout(null);
@@ -441,7 +456,7 @@ public class VInicial extends JFrame {
 			}
 			if (ev.getSource() == bSalir) {
 				if (JOptionPane.showConfirmDialog(null,
-						"Desea salir de la aplicaci�n", "Salir de Agenda", 2) == 0){
+						"Desea salir de la aplicación", "Salir de Agenda", 2) == 0){
 //					try {
 //						control.grabar();
 //					} catch (IOException | SQLException e) {
@@ -451,7 +466,7 @@ public class VInicial extends JFrame {
 //						control.finalizar();
 //					} catch (IOException e) {
 //						JOptionPane.showMessageDialog(null,
-//								"No se pudo realizar la grabaci�n de los datos");
+//								"No se pudo realizar la grabación de los datos");
 //						e.printStackTrace();
 //					} catch (SQLException e){
 //						e.printStackTrace();

@@ -11,17 +11,26 @@ import java.util.Set;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Repository;
+
 import com.cursogetafe.agenda.config.Config;
 import com.cursogetafe.agenda.modelo.Contacto;
 import com.cursogetafe.agenda.modelo.Domicilio;
 
 
+@Repository("contactoDao")
+@Profile("jdbc")
 public class ContactoDaoJDBC implements ContactoDao {
 
 	//le vamos a poner un atributo que es un datasouse
 	private DataSource ds;
-	public ContactoDaoJDBC() {
-		ds = Config.getDataSource();
+	
+	@Autowired
+	public ContactoDaoJDBC(DataSource ds) {
+		super();
+		this.ds = ds;
 	}
 	
 	

@@ -3,22 +3,27 @@ package com.cursogetafe.agenda.persistencia;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.cursogetafe.agenda.config.Config;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Repository;
+
 import com.cursogetafe.agenda.modelo.Contacto;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
 
+@Repository("contactoDao")
+@Profile({"jpa", "default"})
 public class ContactoDaoJPA  implements ContactoDao {
 
 	private EntityManagerFactory emf;
 	private EntityManager em;
 	
 	public ContactoDaoJPA() {
-		emf = Config.getEmf();
 	}
 	
+	@Autowired
 	public ContactoDaoJPA(EntityManagerFactory emf) {
 		this.emf = emf;
 	}

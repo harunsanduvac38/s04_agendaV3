@@ -190,7 +190,7 @@ public class VentanaOpciones extends JFrame {
 				btnGrabar.setEnabled(false);
 				edicion = false;
 				if (cambioOrigenDatos) {
-					JOptionPane.showMessageDialog(null, "Los cambios tendr�n efecto la pr�xima vez que ejecute Agenda\n Debe reiniciar la aplicaci�n");
+					JOptionPane.showMessageDialog(null, "Los cambios tendrán efecto la próxima vez que ejecute Agenda\n Debe reiniciar la aplicación");
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Actualizacion correcta");
@@ -203,7 +203,7 @@ public class VentanaOpciones extends JFrame {
 			}
 			if (ev.getSource() == btnCancelar) {
 				if (!edicion || JOptionPane.showConfirmDialog(null,
-										"Desea abandonar la ventana\n Se perder�n los cambios realizados",
+										"Desea abandonar la ventana\n Se perderán los cambios realizados",
 										"Salir de Contactos", 2) == 0) {
 					salir();
 				}

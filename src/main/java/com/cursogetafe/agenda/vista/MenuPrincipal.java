@@ -1,20 +1,31 @@
 package com.cursogetafe.agenda.vista;
 
 
-import com.cursogetafe.agenda.config.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
+
 import com.cursogetafe.agenda.negocio.Agenda;
 import com.cursogetafe.agenda.util.Util;
 
+@Component
+@Profile("consola")
 public class MenuPrincipal {
+	
 	
 	private Agenda agenda;
 	
-	public MenuPrincipal() {
-//		agenda = new AgendaImpl();
-		agenda = BeanFactory.getAgenda();
+	@Autowired
+	public MenuPrincipal(Agenda agenda) {
+		super();
+		this.agenda = agenda;
 		menu();
 	}
 	
+	public MenuPrincipal() {
+	}
+
+
 	public void menu() {
 		System.out.println("SUPER AGENDA XX 7 PLUS");
 		System.out.println("----------------------");

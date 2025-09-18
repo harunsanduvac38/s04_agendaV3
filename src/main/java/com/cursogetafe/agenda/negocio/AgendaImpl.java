@@ -7,26 +7,27 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 
-import com.cursogetafe.agenda.config.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.cursogetafe.agenda.modelo.Contacto;
 import com.cursogetafe.agenda.persistencia.ContactoDao;
 
 
-
-
-
-
+@Service("negocio")
 public class AgendaImpl implements Agenda {
+	
 	
 	private ContactoDao cDao;
 	
+	@Autowired
+	public AgendaImpl(ContactoDao cDao) {
+		super();
+		this.cDao = cDao;
+	}
+
 	public AgendaImpl() {
-		//cDao = new ContactoDaoMem();
-		//cDao= new ContactoDaoMemSerial();
-//		cDao =new ContactoDaoJDBC();
-//		cDao =new ContactoDaoJPA();
-		
-		cDao = BeanFactory.getContactoDao();
+
 	}
 
 	@Override
