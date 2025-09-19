@@ -9,15 +9,11 @@ import com.cursogetafe.agenda.config.Config;
 
 public class Main {
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args) { //uno le puede pasar parameteos al main 
-		
-		
+				
 		new AnnotationConfigApplicationContext(Config.class);
 		
-		
-	
-		
-
 	}
 
 }
